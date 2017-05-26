@@ -7,14 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		505B721B1ED811BA00788949 /* BannerShufflingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 505B72181ED811BA00788949 /* BannerShufflingView.m */; };
+		505B721C1ED811BA00788949 /* TimerIntermediary.m in Sources */ = {isa = PBXBuildFile; fileRef = 505B721A1ED811BA00788949 /* TimerIntermediary.m */; };
 		5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC5D1ED7FE3F00DF0743 /* main.m */; };
 		5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC601ED7FE3F00DF0743 /* AppDelegate.m */; };
-		5073AC641ED7FE3F00DF0743 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC631ED7FE3F00DF0743 /* ViewController.m */; };
 		5073AC671ED7FE3F00DF0743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5073AC651ED7FE3F00DF0743 /* Main.storyboard */; };
 		5073AC691ED7FE3F00DF0743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5073AC681ED7FE3F00DF0743 /* Assets.xcassets */; };
 		5073AC6C1ED7FE3F00DF0743 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */; };
 		5073AC771ED7FE3F00DF0743 /* DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC761ED7FE3F00DF0743 /* DemoTests.m */; };
 		5073AC821ED7FE3F00DF0743 /* DemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC811ED7FE3F00DF0743 /* DemoUITests.m */; };
+		5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC921ED8017400DF0743 /* RootViewController.swift */; };
+		5073ACAF1ED8086800DF0743 /* banner1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA61ED8086800DF0743 /* banner1@2x.png */; };
+		5073ACB01ED8086800DF0743 /* banner2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA71ED8086800DF0743 /* banner2@2x.png */; };
+		5073ACB11ED8086800DF0743 /* banner3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA81ED8086800DF0743 /* banner3@2x.png */; };
+		5073ACB21ED8086800DF0743 /* banner4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA91ED8086800DF0743 /* banner4@2x.png */; };
+		5073ACB31ED8086800DF0743 /* banner5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACAA1ED8086800DF0743 /* banner5@2x.png */; };
+		5073ACB71ED8088500DF0743 /* BannerCircularlyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5073ACB61ED8088500DF0743 /* BannerCircularlyVC.swift */; };
+		5073ACB91ED80A4100DF0743 /* BannerCircularlyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACB81ED80A4100DF0743 /* BannerCircularlyVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		505B72171ED811BA00788949 /* BannerShufflingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerShufflingView.h; sourceTree = "<group>"; };
+		505B72181ED811BA00788949 /* BannerShufflingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingView.m; sourceTree = "<group>"; };
+		505B72191ED811BA00788949 /* TimerIntermediary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerIntermediary.h; sourceTree = "<group>"; };
+		505B721A1ED811BA00788949 /* TimerIntermediary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerIntermediary.m; sourceTree = "<group>"; };
 		5073AC591ED7FE3F00DF0743 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5073AC5D1ED7FE3F00DF0743 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5073AC5F1ED7FE3F00DF0743 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5073AC601ED7FE3F00DF0743 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5073AC621ED7FE3F00DF0743 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5073AC631ED7FE3F00DF0743 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5073AC661ED7FE3F00DF0743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5073AC681ED7FE3F00DF0743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5073AC6B1ED7FE3F00DF0743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +62,16 @@
 		5073AC7D1ED7FE3F00DF0743 /* DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5073AC811ED7FE3F00DF0743 /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		5073AC831ED7FE3F00DF0743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5073AC8F1ED800BD00DF0743 /* Demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Bridging-Header.h"; sourceTree = "<group>"; };
+		5073AC921ED8017400DF0743 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		5073AC941ED8018E00DF0743 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		5073ACA61ED8086800DF0743 /* banner1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner1@2x.png"; sourceTree = "<group>"; };
+		5073ACA71ED8086800DF0743 /* banner2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner2@2x.png"; sourceTree = "<group>"; };
+		5073ACA81ED8086800DF0743 /* banner3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner3@2x.png"; sourceTree = "<group>"; };
+		5073ACA91ED8086800DF0743 /* banner4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner4@2x.png"; sourceTree = "<group>"; };
+		5073ACAA1ED8086800DF0743 /* banner5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner5@2x.png"; sourceTree = "<group>"; };
+		5073ACB61ED8088500DF0743 /* BannerCircularlyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerCircularlyVC.swift; sourceTree = "<group>"; };
+		5073ACB81ED80A4100DF0743 /* BannerCircularlyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BannerCircularlyVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +124,15 @@
 			children = (
 				5073AC5F1ED7FE3F00DF0743 /* AppDelegate.h */,
 				5073AC601ED7FE3F00DF0743 /* AppDelegate.m */,
-				5073AC621ED7FE3F00DF0743 /* ViewController.h */,
-				5073AC631ED7FE3F00DF0743 /* ViewController.m */,
+				5073AC921ED8017400DF0743 /* RootViewController.swift */,
+				5073AC951ED8064300DF0743 /* BannerCircularly */,
 				5073AC651ED7FE3F00DF0743 /* Main.storyboard */,
 				5073AC681ED7FE3F00DF0743 /* Assets.xcassets */,
 				5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */,
 				5073AC6D1ED7FE3F00DF0743 /* Info.plist */,
 				5073AC5C1ED7FE3F00DF0743 /* Supporting Files */,
+				5073AC8F1ED800BD00DF0743 /* Demo-Bridging-Header.h */,
+				5073AC941ED8018E00DF0743 /* PrefixHeader.pch */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -138,6 +161,24 @@
 				5073AC831ED7FE3F00DF0743 /* Info.plist */,
 			);
 			path = DemoUITests;
+			sourceTree = "<group>";
+		};
+		5073AC951ED8064300DF0743 /* BannerCircularly */ = {
+			isa = PBXGroup;
+			children = (
+				5073ACB61ED8088500DF0743 /* BannerCircularlyVC.swift */,
+				5073ACB81ED80A4100DF0743 /* BannerCircularlyVC.xib */,
+				505B72171ED811BA00788949 /* BannerShufflingView.h */,
+				505B72181ED811BA00788949 /* BannerShufflingView.m */,
+				505B72191ED811BA00788949 /* TimerIntermediary.h */,
+				505B721A1ED811BA00788949 /* TimerIntermediary.m */,
+				5073ACA61ED8086800DF0743 /* banner1@2x.png */,
+				5073ACA71ED8086800DF0743 /* banner2@2x.png */,
+				5073ACA81ED8086800DF0743 /* banner3@2x.png */,
+				5073ACA91ED8086800DF0743 /* banner4@2x.png */,
+				5073ACAA1ED8086800DF0743 /* banner5@2x.png */,
+			);
+			path = BannerCircularly;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +249,7 @@
 					5073AC581ED7FE3F00DF0743 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PZYD6XBB8W;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					5073AC711ED7FE3F00DF0743 = {
@@ -249,8 +291,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5073ACB11ED8086800DF0743 /* banner3@2x.png in Resources */,
+				5073ACB91ED80A4100DF0743 /* BannerCircularlyVC.xib in Resources */,
 				5073AC6C1ED7FE3F00DF0743 /* LaunchScreen.storyboard in Resources */,
 				5073AC691ED7FE3F00DF0743 /* Assets.xcassets in Resources */,
+				5073ACB01ED8086800DF0743 /* banner2@2x.png in Resources */,
+				5073ACB21ED8086800DF0743 /* banner4@2x.png in Resources */,
+				5073ACAF1ED8086800DF0743 /* banner1@2x.png in Resources */,
+				5073ACB31ED8086800DF0743 /* banner5@2x.png in Resources */,
 				5073AC671ED7FE3F00DF0743 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,9 +324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5073AC641ED7FE3F00DF0743 /* ViewController.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
+				505B721C1ED811BA00788949 /* TimerIntermediary.m in Sources */,
+				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
+				505B721B1ED811BA00788949 /* BannerShufflingView.m in Sources */,
+				5073ACB71ED8088500DF0743 /* BannerCircularlyVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,11 +480,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lord.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Demo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -441,17 +498,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT)/PrefixHeader.pch";
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lord.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Demo/Demo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		5073AC8A1ED7FE3F00DF0743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
 				INFOPLIST_FILE = DemoTests/Info.plist;
@@ -465,6 +528,7 @@
 		5073AC8B1ED7FE3F00DF0743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
 				INFOPLIST_FILE = DemoTests/Info.plist;
@@ -478,6 +542,7 @@
 		5073AC8D1ED7FE3F00DF0743 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
 				INFOPLIST_FILE = DemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -490,6 +555,7 @@
 		5073AC8E1ED7FE3F00DF0743 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = PZYD6XBB8W;
 				INFOPLIST_FILE = DemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -518,6 +584,7 @@
 				5073AC881ED7FE3F00DF0743 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5073AC891ED7FE3F00DF0743 /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +593,7 @@
 				5073AC8B1ED7FE3F00DF0743 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5073AC8C1ED7FE3F00DF0743 /* Build configuration list for PBXNativeTarget "DemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +602,7 @@
 				5073AC8E1ED7FE3F00DF0743 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
