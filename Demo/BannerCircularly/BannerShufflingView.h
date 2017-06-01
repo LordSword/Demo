@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSInteger, BannerShufflingViewSlideState) {
-    kBannerShufflingViewSlidePrepare,
-    kBannerShufflingViewSlideSliding,
-    kBannerShufflingViewSlideStop
-};
+#import "BannerShufflingSV.h"
 
 @class BannerShufflingView;
 
@@ -24,17 +19,11 @@ typedef NS_ENUM(NSInteger, BannerShufflingViewSlideState) {
 
 @interface BannerShufflingView : UIView
 
-@property (nonatomic, weak) IBOutlet id<BannerShufflingViewDataSource> dataSource;
+- (instancetype)initWithFrame:(CGRect)frame contentType:(BannerShufflingSVType)type;
 
-@property (nonatomic, assign, readonly) BannerShufflingViewSlideState slideState;
-@property (nonatomic, strong, readonly) NSMutableArray *visiableImageViews;/**< 当前页面可见的imageView */
-@property (nonatomic, assign, readonly) NSInteger currentRow;             /**< 整个dataSource 的 row */
+@property (nonatomic, weak) IBOutlet id<BannerShufflingViewDataSource> dataSource;
+@property (copy, nonatomic, readwrite) void(^clickBlock)(BannerShufflingView *bannerView, NSInteger imageIndex);
 
 - (void)reloadData;
-
-- (void)startScroll;
-- (void)stopScroll;
-
-- (void)setClickImageView:( void(^)(BannerShufflingView *loopView, NSInteger index))clickBlock;
 
 @end
