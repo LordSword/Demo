@@ -19,13 +19,11 @@
 
 @property (nonatomic, assign, readwrite) BannerShufflingSVType type;
 @property (nonatomic, assign, readwrite) BannerShufflingViewSlideState slideState;
-@property (assign, nonatomic) BOOL didLayout;
 
 @property (nonatomic, strong) NSMutableArray<UIImageView *> *allImageViews;   /**< 所有的imageView */
 @property (nonatomic, strong, readwrite) NSMutableArray *visiableImageViews;    /**< 当前页面可见的imageView */
 @property (nonatomic, assign, readonly) CGRect visiableRect;                    /**< 可见的Rect */
-@property (nonatomic, assign, readonly ) NSInteger currentIndex;                /**< 当前位置相对于整个view的 page index 点 */
-@property (nonatomic, assign, readwrite) NSInteger currentRow;                  /**< 整个dataSource 的 row */
+@property (atomic, assign, readwrite) NSInteger currentRow;                  /**< 整个dataSource 的 row */
 
 @property (strong, nonatomic, readwrite) TimerIntermediary *timerIntermediary;
 
@@ -36,6 +34,8 @@
 @end
 
 @implementation BannerShufflingSV
+@synthesize currentRow = _currentRow;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
@@ -49,16 +49,19 @@
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.didLayout /*&& !CGSizeEqualToSize(CGSizeZero, self.allImageViews.firstObject.bounds.size)*/ || CGSizeEqualToSize(CGSizeZero, self.bounds.size)) return;
     
-    self.didLayout = YES;
+    if (CGSizeEqualToSize(self.bounds.size, CGSizeMake(self.contentSize.width/self.allImageViews.count, self.contentSize.height))) {
+        return;
+    }
     CGFloat imageWidth = [self widthOfImageView];
+
     for (NSInteger i = 0; i < self.allImageViews.count; ++i) {
         UIImageView *imageView = self.allImageViews[i];
+        imageView.transform = CGAffineTransformMakeScale(1, 1);
         imageView.frame = CGRectMake(i*imageWidth, 0, imageWidth, CGRectGetHeight(self.bounds));
     }
     self.contentSize = CGSizeMake(self.allImageViews.count*imageWidth, CGRectGetHeight(self.bounds));
-    [self resetImageViewOffset:0];
+    [self resetImageViewOffset];
 }
 
 #pragma mark - Public
@@ -81,10 +84,11 @@
 - (CGFloat)widthOfImageView {
     return CGRectGetWidth(self.bounds);
 }
-- (void)scrollToIndex:(NSInteger)index offset:(CGFloat)offset animated:(BOOL)animated {
+- (void)scrollToIndex:(NSInteger)index {
     NSInteger realIndex = MIN(self.allImageViews.count - 1, MAX(0, index));
     
-    [self setContentOffset:CGPointMake(realIndex*[self widthOfImageView] + offset, 0) animated:animated];
+    //这个方法在快速滑动时将无法重置位置
+    [self setContentOffset:CGPointMake(realIndex*[self widthOfImageView], 0) animated:YES];
 }
 
 #pragma mark - Private
@@ -96,23 +100,21 @@
     return (self.currentRow + offset + self.row)%self.row; //防止负数%
 }
 
-- (void)resetImageViewOffset:(NSInteger)offset {
-    if (0 == self.row) return;
-    self.currentRow = (self.currentRow + offset + self.row)%self.row;
-
-    CGFloat xOffset = 0;
-    if (self.isTracking) {
-        xOffset = self.contentOffset.x - [self widthOfImageView];
-        while (fabs(xOffset) >= [self widthOfImageView] && [self widthOfImageView] > 0) {
-            if (xOffset > 0) {
-                xOffset -= [self widthOfImageView];
-            } else {
-                xOffset += [self widthOfImageView];
-            }
-        }
-    }
-    [self scrollToIndex:self.allImageViews.count/2 offset:xOffset animated:NO];
+- (void)resetImageViewOffset {
+    if (0 == self.row && [self widthOfImageView] > 0) return;
     
+    CGFloat xOffset = 0;
+//    if (self.isTracking) {
+//        xOffset = self.contentOffset.x - self.allImageViews[self.allImageViews.count/2].frame.origin.x;//[self widthOfImageView];
+//        while (fabs(xOffset) >= [self widthOfImageView]) {
+//            if (xOffset > 0) {
+//                xOffset -= [self widthOfImageView];
+//            } else {
+//                xOffset += [self widthOfImageView];
+//            }
+//        }
+//    }
+    self.contentOffset = CGPointMake(self.allImageViews.count/2*[self widthOfImageView] + xOffset, 0);
     if (kBannerShufflingSVCorridor == self.type) {
         [self resetImageViewScale];
     }
@@ -139,7 +141,7 @@
     
     UIImageView *nextImageView = self.allImageViews[nextIndexOfImage];
     if (nextImageView != currentImageView) {
-        CGFloat changedRate = offset/[self widthOfImageView]*(1 - Image_Min_Scale);
+        CGFloat changedRate = fabs(offset)/[self widthOfImageView]*(1 - Image_Min_Scale);
         currentImageView.transform = CGAffineTransformMakeScale(1 - changedRate, 1 - changedRate);
         nextImageView.transform = CGAffineTransformMakeScale(Image_Min_Scale + changedRate, Image_Min_Scale + changedRate);
     }
@@ -258,7 +260,6 @@
     
     for (NSInteger i = 0; i < count; ++i) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.tag = i;
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
         [imageView addGestureRecognizer:tapGesture];
@@ -282,7 +283,7 @@
     if (!_timerIntermediary) {
         _timerIntermediary = [TimerIntermediary timerIntermediaryWithTimeInterval:REPEAT_TIME target:self action:^(TimerIntermediary *intermediary, BannerShufflingSV *target) {
             
-            [target scrollToIndex:3 offset:0 animated:YES];
+            [target scrollToIndex:self.allImageViews.count/2 + 1];
         } userInfo:nil repeats:YES];
     }
     return _timerIntermediary;
@@ -296,9 +297,17 @@
 }
 
 - (void)setCurrentRow:(NSInteger)currentRow {
-    _currentRow = currentRow;
+    
+    @synchronized (self) {
+        _currentRow = currentRow;
+    }
 
     !self.rowDidChange ? : self.rowDidChange(currentRow);
+}
+- (NSInteger)currentRow {
+    @synchronized (self) {
+        return _currentRow;
+    }
 }
 @end
 
@@ -316,9 +325,10 @@
     
     CGFloat offset = scrollView.contentOffset.x/[self widthOfImageView] - self.allImageViews.count/2;
     
-    if ( fabs(offset) >= 1) {
-        
-        [self resetImageViewOffset:offset];
+    if (fabs(offset) >= 1) {
+        self.currentRow = (self.currentRow + (NSInteger)offset + self.row)%self.row;
+        [self resetImageViewOffset];
+
         [self exchangeImageOfImageView];
     } else {
         [self resetVisiableImage];
