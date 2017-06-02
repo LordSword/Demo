@@ -61,7 +61,7 @@
         imageView.frame = CGRectMake(i*imageWidth, 0, imageWidth, CGRectGetHeight(self.bounds));
     }
     self.contentSize = CGSizeMake(self.allImageViews.count*imageWidth, CGRectGetHeight(self.bounds));
-    [self resetImageViewOffset];
+    [self resetImageViewOffset:0];
 }
 
 #pragma mark - Public
@@ -69,6 +69,7 @@
     BannerShufflingSV *result = [[BannerShufflingSV alloc] init];
     
     result.clipsToBounds = kBannerShufflingSVCorridor != type;
+    result.contentInset = UIEdgeInsetsMake(0, -15, 0, -15);
     result.type = type;
     result.loadImageBlock = loadImageBlock;
     result.clickImageBlock = clickBlock;
@@ -100,8 +101,10 @@
     return (self.currentRow + offset + self.row)%self.row; //防止负数%
 }
 
-- (void)resetImageViewOffset {
-    if (0 == self.row && [self widthOfImageView] > 0) return;
+- (void)resetImageViewOffset:(NSInteger)offset {
+    if (0 == self.row || 0 == [self widthOfImageView]) return;
+    
+    self.currentRow = (self.currentRow + (NSInteger)offset + self.row)%self.row;
     
     CGFloat xOffset = 0;
 //    if (self.isTracking) {
@@ -326,9 +329,8 @@
     CGFloat offset = scrollView.contentOffset.x/[self widthOfImageView] - self.allImageViews.count/2;
     
     if (fabs(offset) >= 1) {
-        self.currentRow = (self.currentRow + (NSInteger)offset + self.row)%self.row;
-        [self resetImageViewOffset];
-
+        
+        [self resetImageViewOffset:offset];
         [self exchangeImageOfImageView];
     } else {
         [self resetVisiableImage];
