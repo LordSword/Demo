@@ -69,7 +69,6 @@
     BannerShufflingSV *result = [[BannerShufflingSV alloc] init];
     
     result.clipsToBounds = kBannerShufflingSVCorridor != type;
-    result.contentInset = UIEdgeInsetsMake(0, -15, 0, -15);
     result.type = type;
     result.loadImageBlock = loadImageBlock;
     result.clickImageBlock = clickBlock;
@@ -323,7 +322,12 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     self.slideState = kBannerShufflingViewSlideSliding;
 }
-
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    *targetContentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y);
+}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    self.contentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), 0);
+//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.x/[self widthOfImageView] - self.allImageViews.count/2;
