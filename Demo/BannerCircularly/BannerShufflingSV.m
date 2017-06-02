@@ -322,12 +322,13 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     self.slideState = kBannerShufflingViewSlideSliding;
 }
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    *targetContentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y);
-}
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    self.contentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), 0);
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+//    *targetContentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y);
 //}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
+    [self setContentOffset:CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y) animated:true];
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.x/[self widthOfImageView] - self.allImageViews.count/2;
