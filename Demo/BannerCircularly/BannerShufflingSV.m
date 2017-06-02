@@ -173,7 +173,7 @@
 - (void)resetVisiableImage {
     
     for (int i = 0; i < self.allImageViews.count; ++i) {
-        if (CGSizeEqualToSize(CGSizeZero, self.bounds.size)) return;
+        if (0 == self.row) return;
         
         UIImageView *imageView = self.allImageViews[i];
         
