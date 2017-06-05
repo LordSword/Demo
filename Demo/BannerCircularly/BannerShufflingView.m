@@ -28,10 +28,10 @@
         
         _type = type;
         __weak __typeof(self) wself = self;
-        _contentView = [BannerShufflingSV bannerSVWithType:type loadImage:^(UIImageView *imageView, NSInteger row) {
+        _contentView = [BannerShufflingSV bannerSVWithType:type loadImage:^(UIImageView *imageView, NSInteger row, loadImageComplete loadImageComplete) {
             
-            if ([wself.dataSource respondsToSelector:@selector(imageLoop:visiableImageView:imageForRow:)]) {
-                [wself.dataSource imageLoop:wself visiableImageView:imageView imageForRow:row];
+            if ([wself.dataSource respondsToSelector:@selector(imageLoop:visiableImageView:imageForRow:complete:)]) {
+                [wself.dataSource imageLoop:wself visiableImageView:imageView imageForRow:row complete:loadImageComplete];
             }
         } clickImage:^(NSInteger index) {
             
@@ -66,7 +66,13 @@
     
     [self setNeedsUpdateConstraints];
 }
-
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    
+//    CGFloat contentMargin = kBannerShufflingSVNormal == self.type ? 0 : 15;
+//    self.contentView.frame = CGRectMake(contentMargin, 0, CGRectGetWidth(self.bounds) - 2*contentMargin, CGRectGetHeight(self.bounds));
+//    self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - CGRectGetHeight(self.pageControl.bounds), CGRectGetWidth(self.bounds), CGRectGetHeight(self.pageControl.bounds));
+//}
 - (void)updateConstraints {
     [super updateConstraints];
     
@@ -92,6 +98,7 @@
 }
 - (void)resetScrollContent {
     
+    [self updateConstraintsIfNeeded];
     if ([self.dataSource respondsToSelector:@selector(imageLoopNumberOfRow:)]) {
         
         self.contentView.row = [self.dataSource imageLoopNumberOfRow:self];

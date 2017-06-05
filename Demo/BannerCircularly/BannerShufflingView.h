@@ -13,7 +13,7 @@
 
 @protocol BannerShufflingViewDataSource  <NSObject>
 
-- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row;
+- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row complete:(void(^)(NSString *imagePath))complete;
 - (NSInteger)imageLoopNumberOfRow:(BannerShufflingView *)scrollView;
 @end
 

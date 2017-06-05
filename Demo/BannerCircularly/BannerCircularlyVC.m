@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSArray *bannerNames;
 
 @property (strong, nonatomic) BannerShufflingView *bannerView;
+@property (strong, nonatomic) BannerShufflingView *bannerView1;
 
 @end
 
@@ -22,9 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view layoutIfNeeded];
+    
+    [self.view addSubview:self.bannerView1];
     [self.view addSubview:self.bannerView];
     self.bannerView.dataSource = self;
+    self.bannerView1.dataSource = self;
     // Do any additional setup after loading the view.
 }
 
@@ -36,24 +43,32 @@
 - (NSInteger)imageLoopNumberOfRow:(BannerShufflingView *)scrollView {
     return self.bannerNames.count;
 }
-- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row {
+- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row complete:(void(^)(NSString *imagePath))complete {
     NSLog(@"-----%@", @(row));
     imageView.image = [UIImage imageNamed:self.bannerNames[row]];
+    
+    !complete ? : complete(self.bannerNames[row]);
 }
 
 - (NSArray<NSString *> *)bannerNames {
     
     if (!_bannerNames) {
-        _bannerNames = @[@"banner2", @"banner1", @"banner3", @"banner4", @"banner5"];
+        _bannerNames = @[ @"banner5", @"banner4", @"banner2"];
     }
     return _bannerNames;
 }
 - (BannerShufflingView *)bannerView {
     
     if (!_bannerView) {
-        _bannerView = [[BannerShufflingView alloc] initWithFrame:CGRectMake(0, 200, 375, 200) contentType:kBannerShufflingSVCorridor];
+        _bannerView = [[BannerShufflingView alloc] initWithFrame:CGRectMake(0, 350, 375, 200) contentType:kBannerShufflingSVCorridor];
     }
     return _bannerView;
+}
+- (BannerShufflingView *)bannerView1 {
+    if (!_bannerView1) {
+        _bannerView1 = [[BannerShufflingView alloc] initWithFrame:CGRectMake(0, 100, 375, 200) contentType:kBannerShufflingSVNormal];
+    }
+    return _bannerView1;
 }
 
 /*

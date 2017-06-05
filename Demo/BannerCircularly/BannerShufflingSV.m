@@ -20,7 +20,7 @@
 @property (nonatomic, assign, readwrite) BannerShufflingSVType type;
 @property (nonatomic, assign, readwrite) BannerShufflingViewSlideState slideState;
 
-@property (nonatomic, strong) NSMutableArray<UIImageView *> *allImageViews;   /**< 所有的imageView */
+@property (nonatomic, strong) NSMutableArray<UIImageView *> *allImageViews;   /**< 所有的imageView 当imageView.tag = -1 时 为默认图片或无图 */
 @property (nonatomic, strong, readwrite) NSMutableArray *visiableImageViews;    /**< 当前页面可见的imageView */
 @property (nonatomic, assign, readonly) CGRect visiableRect;                    /**< 可见的Rect */
 @property (atomic, assign, readwrite) NSInteger currentRow;                  /**< 整个dataSource 的 row */
@@ -65,13 +65,14 @@
 }
 
 #pragma mark - Public
-+ (BannerShufflingSV *)bannerSVWithType:(BannerShufflingSVType)type loadImage:(void(^)(UIImageView *, NSInteger row))loadImageBlock clickImage:( void(^)(NSInteger index))clickBlock {
++ (BannerShufflingSV *)bannerSVWithType:(BannerShufflingSVType)type loadImage:(loadImageBlock)loadImageBlock clickImage:( void(^)(NSInteger index))clickBlock {
     BannerShufflingSV *result = [[BannerShufflingSV alloc] init];
     
     result.clipsToBounds = kBannerShufflingSVCorridor != type;
     result.type = type;
     result.loadImageBlock = loadImageBlock;
     result.clickImageBlock = clickBlock;
+    result.contentInset = UIEdgeInsetsZero;
     return result;
 }
 - (void)startScroll {
@@ -152,8 +153,11 @@
     
     NSMutableDictionary *tmpDic = [[NSMutableDictionary alloc] init];
     for (int i = 0; i < self.allImageViews.count; ++i) {
-        UIImageView *imageView       = self.allImageViews[i];
-        [tmpDic setValue:imageView.image forKey:@(imageView.tag).stringValue];
+        UIImageView *imageView = self.allImageViews[i];
+        
+        if (-1 != imageView.tag) {
+            [tmpDic setValue:imageView.image forKey:@(imageView.tag).stringValue];
+        }
     }
    
     for (int i = 0; i < self.allImageViews.count; ++i) {
@@ -162,10 +166,14 @@
         UIImageView *imageView       = self.allImageViews[i];
         
         imageView.image = [tmpDic valueForKey:@(rowOfImageView + Image_Offset).stringValue];
-        imageView.tag = rowOfImageView + Image_Offset;
 
-        if (!imageView.image && [self.visiableImageViews containsObject:imageView]) {
-            !self.loadImageBlock ? : self.loadImageBlock(imageView, rowOfImageView);
+        if (imageView.image ) {
+            imageView.tag = rowOfImageView + Image_Offset;
+        } else {
+            imageView.tag = -1;
+            if ([self.visiableImageViews containsObject:imageView]) {
+                [self loadImageForImageView:imageView];
+            }
         }
     }
 }
@@ -173,17 +181,14 @@
 - (void)resetVisiableImage {
     
     for (int i = 0; i < self.allImageViews.count; ++i) {
-        if (0 == self.row) return;
+        if (0 == self.row || CGSizeEqualToSize(CGSizeZero, self.bounds.size)) return;
         
         UIImageView *imageView = self.allImageViews[i];
         
         if ( CGRectIntersectsRect(imageView.frame, self.visiableRect) ) { //CGRectEqualToRect(imageView.frame, [self visiableRect])
             if ( ![self.visiableImageViews containsObject:imageView] ) {
                 [self.visiableImageViews addObject:imageView];
-                
-                NSInteger row = [self convertIndexToRow:[self.allImageViews indexOfObject:imageView]];
-                !self.loadImageBlock ? : self.loadImageBlock(imageView, row);
-                imageView.tag = row + Image_Offset;
+                [self loadImageForImageView:imageView];
             }
         } else {
             [self.visiableImageViews removeObject:imageView];
@@ -199,6 +204,14 @@
     }
     
     return result;
+}
+- (void)loadImageForImageView:(UIImageView *)imageView {
+    if ( -1 != imageView.tag) return;
+    
+    NSInteger row = [self convertIndexToRow:[self.allImageViews indexOfObject:imageView]];
+    !self.loadImageBlock ? : self.loadImageBlock(imageView, row, ^(NSString *imagePath){
+        imageView.tag = row + Image_Offset;
+    });
 }
 
 - (void)clickImageView:(UITapGestureRecognizer *)tapGesture {
@@ -263,6 +276,7 @@
     for (NSInteger i = 0; i < count; ++i) {
         UIImageView *imageView = [[UIImageView alloc] init];
         
+        imageView.tag = -1; //代表无图
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
         [imageView addGestureRecognizer:tapGesture];
         imageView.userInteractionEnabled = YES;

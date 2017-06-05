@@ -20,15 +20,18 @@ typedef NS_ENUM(NSInteger, BannerShufflingViewSlideState) {
 };
 #define MAX_VIEW_NUM 5
 
+typedef void(^loadImageComplete)(NSString *imagePath);
+typedef void(^loadImageBlock)(UIImageView *, NSInteger row, loadImageComplete loadIamgeComplete);
+
 //抽象类
 @interface BannerShufflingSV : UIScrollView
 
-+ (BannerShufflingSV *)bannerSVWithType:(BannerShufflingSVType)type loadImage:(void(^)(UIImageView *, NSInteger row))loadImageBlock clickImage:( void(^)(NSInteger index))clickBlock;
++ (BannerShufflingSV *)bannerSVWithType:(BannerShufflingSVType)type loadImage:(loadImageBlock)loadImageBlock clickImage:( void(^)(NSInteger index))clickBlock;
 
 @property (nonatomic, assign) NSInteger row;
 
 @property (copy, nonatomic) void(^clickImageBlock)(NSInteger index);
-@property (copy, nonatomic) void(^loadImageBlock)(UIImageView *imageView, NSInteger row);
+@property (copy, nonatomic) loadImageBlock loadImageBlock;
 @property (copy, nonatomic) void(^rowDidChange)(NSInteger row);
 
 - (void)startScroll;
