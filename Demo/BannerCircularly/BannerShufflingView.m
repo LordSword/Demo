@@ -23,7 +23,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame contentType:(BannerShufflingSVType)type {
     
-    if (self = [self initWithFrame:frame]) {
+    if (self = [super initWithFrame:frame]) {
         self.clipsToBounds = YES;
         
         _type = type;
@@ -48,16 +48,11 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    if (self = [self initWithFrame:frame contentType:kBannerShufflingSVNormal]) {
         
         [self initializeBannerShuffingView];
     }
     return self;
-}
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    [self initializeBannerShuffingView];
 }
 
 - (void)initializeBannerShuffingView {
