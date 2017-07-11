@@ -248,18 +248,17 @@
     }
 }
 - (void)setRow:(NSInteger)row {
-    if (_row == row) return;
     _row = row;
     
-    [self removeImageView];
     [self addImageView:( 1 == self.row ? 1 : MAX_VIEW_NUM)];
+    self.currentRow = 0;
+    [self resetVisiableImage];
+    
     if (1 == self.row) {
         [self stopScroll];
     } else {
         [self startScroll];
     }
-    self.currentRow = 0;
-    [self resetVisiableImage];
 }
 - (void)removeImageView {
     
@@ -267,23 +266,31 @@
         [obj removeFromSuperview];
     }];
     [self.allImageViews removeAllObjects];
-    [self.visiableImageViews removeAllObjects];
 }
 - (void)addImageView:(NSInteger)count {
-    
-    self.scrollEnabled = 1 != count ? : NO;
-    
-    for (NSInteger i = 0; i < count; ++i) {
-        UIImageView *imageView = [[UIImageView alloc] init];
+    [self.visiableImageViews removeAllObjects];
+
+    if (count == self.allImageViews.count) {
+        for (UIView *view in self.allImageViews) {
+            view.tag = -1;
+        }
+    } else {
+        [self removeImageView];
+        self.scrollEnabled = 1 != count ? : NO;
         
-        imageView.tag = -1; //代表无图
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
-        [imageView addGestureRecognizer:tapGesture];
-        imageView.userInteractionEnabled = YES;
-        [self.allImageViews addObject:imageView];
-        [self addSubview:imageView];
+        for (NSInteger i = 0; i < count; ++i) {
+            UIImageView *imageView = [[UIImageView alloc] init];
+            
+            imageView.tag = -1; //代表无图
+            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
+            [imageView addGestureRecognizer:tapGesture];
+            imageView.userInteractionEnabled = YES;
+            [self.allImageViews addObject:imageView];
+            [self addSubview:imageView];
+        }
+        self.contentSize = CGSizeZero; //重置大小
+        [self layoutIfNeeded];
     }
-    [self layoutIfNeeded];
 }
 
 #pragma mark - Getter
