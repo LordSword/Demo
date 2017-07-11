@@ -12,7 +12,6 @@
 @interface BannerCircularlyVC () <BannerShufflingViewDataSource>
 
 @property (strong, nonatomic) NSArray *bannerNames;
-@property (strong, nonatomic) NSArray *bannerNames1;
 
 @property (strong, nonatomic) BannerShufflingView *bannerView;
 @property (strong, nonatomic) BannerShufflingView *bannerView1;
@@ -34,15 +33,6 @@
     self.bannerView.dataSource = self;
     self.bannerView1.dataSource = self;
     // Do any additional setup after loading the view.
-    
-    [self performSelector:@selector(testChangeImageData) withObject:nil afterDelay:6];
-}
-
-- (void)testChangeImageData {
-    self.bannerNames = @[@"banner1", @"banner2", @"banner3"];
-    
-    [self.bannerView reloadData];
-    [self.bannerView1 reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,13 +56,6 @@
         _bannerNames = @[ @"banner5", @"banner4", @"banner2"];
     }
     return _bannerNames;
-}
-- (NSArray<NSString *> *)bannerNames1 {
-    
-    if (!_bannerNames1) {
-        _bannerNames1 = @[ @"banner1", @"banner2", @"banne3"];
-    }
-    return _bannerNames1;
 }
 - (BannerShufflingView *)bannerView {
     

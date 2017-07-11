@@ -21,8 +21,10 @@
 		5073ACB21ED8086800DF0743 /* banner4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA91ED8086800DF0743 /* banner4@2x.png */; };
 		5073ACB31ED8086800DF0743 /* banner5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACAA1ED8086800DF0743 /* banner5@2x.png */; };
 		507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E21FC1EDF00FF004B9699 /* BannerCircularlyVC.m */; };
-		50D148551EE0503B00490E58 /* BannerShufflingSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D148501EE0503B00490E58 /* BannerShufflingSV.m */; };
-		50D148561EE0503B00490E58 /* BannerShufflingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D148521EE0503B00490E58 /* BannerShufflingView.m */; };
+		509155251F14762600DD53C8 /* BannerCircularlyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 509155221F14762600DD53C8 /* BannerCircularlyVC.m */; };
+		509155261F14762600DD53C8 /* BannerShufflingSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 509155231F14762600DD53C8 /* BannerShufflingSV.m */; };
+		509155271F14762600DD53C8 /* BannerShufflingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 509155241F14762600DD53C8 /* BannerShufflingView.m */; };
+		509155291F14763B00DD53C8 /* BannerShufflingSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 509155281F14763B00DD53C8 /* BannerShufflingSV.m */; };
 		50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D148541EE0503B00490E58 /* TimerIntermediary.m */; };
 /* End PBXBuildFile section */
 
@@ -68,10 +70,11 @@
 		5073ACAA1ED8086800DF0743 /* banner5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner5@2x.png"; sourceTree = "<group>"; };
 		507E21FB1EDF00FF004B9699 /* BannerCircularlyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCircularlyVC.h; sourceTree = "<group>"; };
 		507E21FC1EDF00FF004B9699 /* BannerCircularlyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerCircularlyVC.m; sourceTree = "<group>"; };
-		50D1484F1EE0503B00490E58 /* BannerShufflingSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerShufflingSV.h; sourceTree = "<group>"; };
-		50D148501EE0503B00490E58 /* BannerShufflingSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingSV.m; sourceTree = "<group>"; };
-		50D148511EE0503B00490E58 /* BannerShufflingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerShufflingView.h; sourceTree = "<group>"; };
-		50D148521EE0503B00490E58 /* BannerShufflingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingView.m; sourceTree = "<group>"; };
+		509155211F14762600DD53C8 /* BannerCircularlyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCircularlyVC.h; sourceTree = "<group>"; };
+		509155221F14762600DD53C8 /* BannerCircularlyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerCircularlyVC.m; sourceTree = "<group>"; };
+		509155231F14762600DD53C8 /* BannerShufflingSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingSV.m; sourceTree = "<group>"; };
+		509155241F14762600DD53C8 /* BannerShufflingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingView.m; sourceTree = "<group>"; };
+		509155281F14763B00DD53C8 /* BannerShufflingSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingSV.m; sourceTree = "<group>"; };
 		50D148531EE0503B00490E58 /* TimerIntermediary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerIntermediary.h; sourceTree = "<group>"; };
 		50D148541EE0503B00490E58 /* TimerIntermediary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerIntermediary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,10 +173,11 @@
 			children = (
 				507E21FB1EDF00FF004B9699 /* BannerCircularlyVC.h */,
 				507E21FC1EDF00FF004B9699 /* BannerCircularlyVC.m */,
-				50D148511EE0503B00490E58 /* BannerShufflingView.h */,
-				50D148521EE0503B00490E58 /* BannerShufflingView.m */,
-				50D1484F1EE0503B00490E58 /* BannerShufflingSV.h */,
-				50D148501EE0503B00490E58 /* BannerShufflingSV.m */,
+				509155211F14762600DD53C8 /* BannerCircularlyVC.h */,
+				509155221F14762600DD53C8 /* BannerCircularlyVC.m */,
+				509155231F14762600DD53C8 /* BannerShufflingSV.m */,
+				509155281F14763B00DD53C8 /* BannerShufflingSV.m */,
+				509155241F14762600DD53C8 /* BannerShufflingView.m */,
 				50D148531EE0503B00490E58 /* TimerIntermediary.h */,
 				50D148541EE0503B00490E58 /* TimerIntermediary.m */,
 				5073ACA61ED8086800DF0743 /* banner1@2x.png */,
@@ -327,13 +331,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50D148551EE0503B00490E58 /* BannerShufflingSV.m in Sources */,
-				50D148561EE0503B00490E58 /* BannerShufflingView.m in Sources */,
+				509155251F14762600DD53C8 /* BannerCircularlyVC.m in Sources */,
+				509155271F14762600DD53C8 /* BannerShufflingView.m in Sources */,
 				507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */,
 				50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
 				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
+				509155261F14762600DD53C8 /* BannerShufflingSV.m in Sources */,
+				509155291F14763B00DD53C8 /* BannerShufflingSV.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

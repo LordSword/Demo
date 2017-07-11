@@ -42,9 +42,7 @@
         };
         
         [self addSubview:_contentView];
-        [self addSubview:self.pageControl];
-        
-        [self setNeedsUpdateConstraints];
+        [self sendSubviewToBack:_contentView];
     }
     return self;
 }
@@ -52,10 +50,24 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [self initWithFrame:frame contentType:kBannerShufflingSVNormal]) {
         
+        [self initializeBannerShuffingView];
     }
     return self;
 }
 
+- (void)initializeBannerShuffingView {
+    [self addSubview:self.contentView];
+    [self addSubview:self.pageControl];
+    
+    [self setNeedsUpdateConstraints];
+}
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    
+//    CGFloat contentMargin = kBannerShufflingSVNormal == self.type ? 0 : 15;
+//    self.contentView.frame = CGRectMake(contentMargin, 0, CGRectGetWidth(self.bounds) - 2*contentMargin, CGRectGetHeight(self.bounds));
+//    self.pageControl.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - CGRectGetHeight(self.pageControl.bounds), CGRectGetWidth(self.bounds), CGRectGetHeight(self.pageControl.bounds));
+//}
 - (void)updateConstraints {
     [super updateConstraints];
     
