@@ -41,6 +41,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
+        _didTouch                           = NO;
         self.delegate                       = self;
         self.panGestureRecognizer.delegate  = self;
         self.showsHorizontalScrollIndicator = NO;
