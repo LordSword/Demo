@@ -256,6 +256,7 @@
     
     [self addImageView:( 1 == self.row ? 1 : MAX_VIEW_NUM)];
     self.currentRow = 0;
+    [self resetImageViewOffset:0];
     [self resetVisiableImage];
     
     if (1 == self.row) {
