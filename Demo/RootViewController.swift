@@ -10,7 +10,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     
-    let demoList = ["banner循环滚动"]
+    let demoList = ["banner循环滚动", "wave波动"]
     lazy var tableView:UITableView = {
         var result = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
         
@@ -69,6 +69,8 @@ extension RootViewController:UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             nextVC = BannerCircularlyVC()
+        case 1:
+            nextVC = WaveViewController()
         default:
             break
         }

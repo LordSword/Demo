@@ -21,6 +21,8 @@
 		5073ACB21ED8086800DF0743 /* banner4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACA91ED8086800DF0743 /* banner4@2x.png */; };
 		5073ACB31ED8086800DF0743 /* banner5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5073ACAA1ED8086800DF0743 /* banner5@2x.png */; };
 		507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 507E21FC1EDF00FF004B9699 /* BannerCircularlyVC.m */; };
+		5084CED31F21C64300E99988 /* WaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5084CED21F21C64300E99988 /* WaveViewController.m */; };
+		5084CED61F21C69200E99988 /* WaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5084CED51F21C69200E99988 /* WaveView.m */; };
 		509155321F1476F800DD53C8 /* BannerShufflingSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 5091552F1F1476F800DD53C8 /* BannerShufflingSV.m */; };
 		509155331F1476F800DD53C8 /* BannerShufflingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 509155311F1476F800DD53C8 /* BannerShufflingView.m */; };
 		50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D148541EE0503B00490E58 /* TimerIntermediary.m */; };
@@ -68,6 +70,10 @@
 		5073ACAA1ED8086800DF0743 /* banner5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "banner5@2x.png"; sourceTree = "<group>"; };
 		507E21FB1EDF00FF004B9699 /* BannerCircularlyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerCircularlyVC.h; sourceTree = "<group>"; };
 		507E21FC1EDF00FF004B9699 /* BannerCircularlyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerCircularlyVC.m; sourceTree = "<group>"; };
+		5084CED11F21C64300E99988 /* WaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveViewController.h; sourceTree = "<group>"; };
+		5084CED21F21C64300E99988 /* WaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveViewController.m; sourceTree = "<group>"; };
+		5084CED41F21C69200E99988 /* WaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveView.h; sourceTree = "<group>"; };
+		5084CED51F21C69200E99988 /* WaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveView.m; sourceTree = "<group>"; };
 		5091552E1F1476F800DD53C8 /* BannerShufflingSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerShufflingSV.h; sourceTree = "<group>"; };
 		5091552F1F1476F800DD53C8 /* BannerShufflingSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerShufflingSV.m; sourceTree = "<group>"; };
 		509155301F1476F800DD53C8 /* BannerShufflingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerShufflingView.h; sourceTree = "<group>"; };
@@ -128,6 +134,7 @@
 				5073AC601ED7FE3F00DF0743 /* AppDelegate.m */,
 				5073AC921ED8017400DF0743 /* RootViewController.swift */,
 				5073AC951ED8064300DF0743 /* BannerCircularly */,
+				5084CED01F21C61900E99988 /* Wave */,
 				5073AC651ED7FE3F00DF0743 /* Main.storyboard */,
 				5073AC681ED7FE3F00DF0743 /* Assets.xcassets */,
 				5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */,
@@ -183,6 +190,17 @@
 				5073ACAA1ED8086800DF0743 /* banner5@2x.png */,
 			);
 			path = BannerCircularly;
+			sourceTree = "<group>";
+		};
+		5084CED01F21C61900E99988 /* Wave */ = {
+			isa = PBXGroup;
+			children = (
+				5084CED11F21C64300E99988 /* WaveViewController.h */,
+				5084CED21F21C64300E99988 /* WaveViewController.m */,
+				5084CED41F21C69200E99988 /* WaveView.h */,
+				5084CED51F21C69200E99988 /* WaveView.m */,
+			);
+			name = Wave;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,12 +346,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */,
+				5084CED31F21C64300E99988 /* WaveViewController.m in Sources */,
 				50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
 				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
 				509155321F1476F800DD53C8 /* BannerShufflingSV.m in Sources */,
 				509155331F1476F800DD53C8 /* BannerShufflingView.m in Sources */,
+				5084CED61F21C69200E99988 /* WaveView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
