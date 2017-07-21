@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5035655D1F21EC3A0034F3C8 /* WaterWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */; };
+		503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503565601F21EC870034F3C8 /* WaterWaveView.m */; };
 		5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC5D1ED7FE3F00DF0743 /* main.m */; };
 		5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC601ED7FE3F00DF0743 /* AppDelegate.m */; };
 		5073AC671ED7FE3F00DF0743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5073AC651ED7FE3F00DF0743 /* Main.storyboard */; };
@@ -46,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5035655B1F21EC3A0034F3C8 /* WaterWaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterWaveViewController.h; sourceTree = "<group>"; };
+		5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveViewController.m; sourceTree = "<group>"; };
+		5035655F1F21EC870034F3C8 /* WaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterWaveView.h; sourceTree = "<group>"; };
+		503565601F21EC870034F3C8 /* WaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveView.m; sourceTree = "<group>"; };
 		5073AC591ED7FE3F00DF0743 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5073AC5D1ED7FE3F00DF0743 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5073AC5F1ED7FE3F00DF0743 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -107,6 +113,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5035655A1F21EBFF0034F3C8 /* WaterWave */ = {
+			isa = PBXGroup;
+			children = (
+				5035655B1F21EC3A0034F3C8 /* WaterWaveViewController.h */,
+				5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */,
+				5035655F1F21EC870034F3C8 /* WaterWaveView.h */,
+				503565601F21EC870034F3C8 /* WaterWaveView.m */,
+			);
+			name = WaterWave;
+			sourceTree = "<group>";
+		};
 		5073AC501ED7FE3F00DF0743 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +152,7 @@
 				5073AC921ED8017400DF0743 /* RootViewController.swift */,
 				5073AC951ED8064300DF0743 /* BannerCircularly */,
 				5084CED01F21C61900E99988 /* Wave */,
+				5035655A1F21EBFF0034F3C8 /* WaterWave */,
 				5073AC651ED7FE3F00DF0743 /* Main.storyboard */,
 				5073AC681ED7FE3F00DF0743 /* Assets.xcassets */,
 				5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */,
@@ -348,10 +366,12 @@
 				507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */,
 				5084CED31F21C64300E99988 /* WaveViewController.m in Sources */,
 				50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */,
+				503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
 				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
 				509155321F1476F800DD53C8 /* BannerShufflingSV.m in Sources */,
+				5035655D1F21EC3A0034F3C8 /* WaterWaveViewController.m in Sources */,
 				509155331F1476F800DD53C8 /* BannerShufflingView.m in Sources */,
 				5084CED61F21C69200E99988 /* WaveView.m in Sources */,
 			);

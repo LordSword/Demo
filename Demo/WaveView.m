@@ -21,6 +21,8 @@
 
 @implementation WaveView
 
+@synthesize waveColor = _waveColor;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
@@ -63,7 +65,6 @@
     CGPathCloseSubpath(pathRef);
     //设置第一个波layer的path
     self.layer1.path = pathRef;
-    self.layer1.fillColor = [self.waveColor colorWithAlphaComponent:0.8].CGColor;
     CGPathRelease(pathRef);
     
     //设置第二条波曲线的路径
@@ -82,6 +83,14 @@
     self.layer2.path = pathRef2;
     self.layer2.fillColor = self.waveColor.CGColor;
     CGPathRelease(pathRef2);
+}
+
+#pragma mark - Setter
+- (void)setWaveColor:(UIColor *)waveColor {
+    _waveColor = waveColor;
+    
+    self.layer1.fillColor = [waveColor colorWithAlphaComponent:0.8].CGColor;
+    self.layer2.fillColor = waveColor.CGColor;
 }
 
 #pragma mark -Getter
