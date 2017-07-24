@@ -11,6 +11,7 @@
 @interface WaterWaveView : UIView
 
 @property (assign, nonatomic, getter=isAnimation) BOOL animation;
+@property (strong, nonatomic) UIColor *originColor;
 
 - (void)wave;
 - (void)stopWave;

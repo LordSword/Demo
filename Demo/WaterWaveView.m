@@ -8,52 +8,48 @@
 
 #import "WaterWaveView.h"
 
-@interface WaterWaveView()
+#import "TimerIntermediary.h"
 
-@property (strong, nonatomic) CALayer *layer1;
-@property (strong, nonatomic) CALayer *layer2;
-@property (strong, nonatomic) CALayer *layer3;
+@interface WaterWaveView() <CAAnimationDelegate>
+
+@property (strong, nonatomic) NSMutableArray <CALayer *> *animationLayer;
+@property (strong, nonatomic) TimerIntermediary *timer;
 
 @end
 
 @implementation WaterWaveView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    
-    if (self = [super initWithFrame:frame]) {
-        [self.layer addSublayer:self.layer1];
-        [self.layer addSublayer:self.layer2];
-        [self.layer addSublayer:self.layer3];
-    }
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    self.layer1.bounds = self.bounds;
-    self.layer2.bounds = self.bounds;
-    self.layer3.bounds = self.bounds;
-    self.layer1.position = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
-}
 - (void)wave {
     
     if (self.animation) return;
     self.animation = true;
     
-    [self startAnimationWithShape:self.layer1];
-    [self startAnimationWithShape:self.layer2];
-    [self startAnimationWithShape:self.layer3];
-    
+    [self.timer start];
+    for (CALayer *layer in self.animationLayer) {
+        [self startAnimationWithShape:layer];
+    }
 }
 - (void)stopWave {
     
     if (!self.animation) return;
     self.animation = false;
     
-    [self pauseAnimationWithShape:self.layer1];
-    [self pauseAnimationWithShape:self.layer2];
-    [self pauseAnimationWithShape:self.layer3];
+    [self.timer stop];
+    for (CALayer *layer in self.animationLayer) {
+        [self pauseAnimationWithShape:layer];
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    
+    if (flag) {
+        CALayer *layer = [anim valueForKey:@"layer"];
+        
+        if ([self.animationLayer containsObject:layer]) {
+            [layer removeFromSuperlayer];
+            [self.animationLayer removeObject:layer];
+        }
+    }
 }
 
 - (void)startAnimationWithShape:(CALayer *)layer {
@@ -71,51 +67,62 @@
     layer.timeOffset = pausedTime;
 }
 
-- (void)getAnimationAction:(CALayer *)layer {
+- (CALayer *)createAnimationLayer {
+    CALayer *result = [CALayer layer];
+    
+    result.backgroundColor = self.originColor.CGColor;
+    result.bounds = self.bounds;
+    result.position = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+    result.masksToBounds = YES;
+    result.cornerRadius = MIN(self.bounds.size.width, self.bounds.size.height)/2;
+    
+    return result;
+}
+
+- (void)getAnimationActionWithLayer:(CALayer *)layer {
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    anim.duration = 2.5; // 动画持续时间
-    anim.repeatCount = CGFLOAT_MAX; // 重复次数
-    anim.fillMode = kCAFillModeForwards;
-    anim.removedOnCompletion = NO;
-    
     anim.fromValue = @0.3;
     anim.toValue = @1;
     
-    layer.speed = 0;
-    [layer addAnimation:anim forKey:@"scaleAnimation"];
+    CABasicAnimation *anim1 = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    anim1.fromValue = (id)self.originColor.CGColor;
+    anim1.toValue = (id)[self.originColor colorWithAlphaComponent:0.01].CGColor;
+    
+    animationGroup.duration = 2.5f;
+    animationGroup.repeatCount = 1;
+    animationGroup.fillMode = kCAFillModeForwards;
+    animationGroup.removedOnCompletion = NO;
+    animationGroup.animations = @[anim, anim1];
+    animationGroup.delegate = self;
+    
+    [animationGroup setValue:layer forKey:@"layer"];
+    [layer addAnimation:animationGroup forKey:@"layer"];
 }
 
-- (CALayer *)layer1 {
+
+- (NSMutableArray<CALayer *> *)animationLayer {
     
-    if (!_layer1) {
-        _layer1 = [CALayer layer];
-        
-        _layer1.backgroundColor = [UIColor colorWithRed:0x84 green:0x96 blue:0xFF alpha:0.68].CGColor;
-        _layer1.backgroundColor = [UIColor redColor].CGColor;
-        [self getAnimationAction:_layer1];
+    if (!_animationLayer) {
+        _animationLayer = [NSMutableArray arrayWithCapacity:5];
     }
-    return _layer1;
+    return _animationLayer;
 }
-- (CALayer *)layer2 {
+
+- (TimerIntermediary *)timer {
     
-    if (!_layer2) {
-        _layer2 = [CALayer layer];
-        
-        _layer2.backgroundColor = [UIColor colorWithRed:0x76 green:0x89 blue:0xFC alpha:0.68].CGColor;
-        [self getAnimationAction:_layer2];
+    if (!_timer) {
+        _timer = [TimerIntermediary timerIntermediaryWithTimeInterval:1.f target:self action:^(TimerIntermediary *intermediary, WaterWaveView *target) {
+            
+            CALayer *layer = [target createAnimationLayer];
+            [target getAnimationActionWithLayer:layer];
+            [target.layer addSublayer:layer];
+            [target.animationLayer addObject:layer];
+        } userInfo:nil repeats:YES];
     }
-    return _layer2;
-}
-- (CALayer *)layer3 {
-    
-    if (!_layer3) {
-        _layer3 = [CALayer layer];
-        
-        _layer3.backgroundColor = [UIColor colorWithRed:0x6E green:0x83 blue:0xFF alpha:0.68].CGColor;
-        [self getAnimationAction:_layer3];
-    }
-    return _layer3;
+    return _timer;
 }
 
 @end

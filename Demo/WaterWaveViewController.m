@@ -49,6 +49,8 @@
     
     if (!_waterWaveView) {
         _waterWaveView = [[WaterWaveView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+        
+        _waterWaveView.originColor = [UIColor redColor];
     }
     return _waterWaveView;
 }
