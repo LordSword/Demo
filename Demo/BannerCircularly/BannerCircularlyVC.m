@@ -61,12 +61,14 @@
     
     if (!_bannerView) {
         _bannerView = [[BannerShufflingView alloc] initWithFrame:CGRectMake(0, 350, 375, 200) contentType:kBannerShufflingSVCorridor];
+        [_bannerView stopScroll];
     }
     return _bannerView;
 }
 - (BannerShufflingView *)bannerView1 {
     if (!_bannerView1) {
         _bannerView1 = [[BannerShufflingView alloc] initWithFrame:CGRectMake(0, 100, 375, 200) contentType:kBannerShufflingSVNormal];
+        [_bannerView1 stopScroll];
     }
     return _bannerView1;
 }

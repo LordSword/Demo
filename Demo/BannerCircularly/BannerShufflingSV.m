@@ -105,23 +105,24 @@
     return (self.currentRow + offset + self.row)%self.row; //防止负数%
 }
 
-- (void)resetImageViewOffset:(NSInteger)offset {
+- (void)resetImageViewOffset:(CGFloat)offset {
     if (0 == self.row || 0 == [self widthOfImageView]) return;
     
     self.currentRow = (self.currentRow + (NSInteger)offset + self.row)%self.row;
     
     CGFloat xOffset = 0;
-//    if (self.isTracking) {
-//        xOffset = self.contentOffset.x - self.allImageViews[self.allImageViews.count/2].frame.origin.x;//[self widthOfImageView];
-//        while (fabs(xOffset) >= [self widthOfImageView]) {
-//            if (xOffset > 0) {
-//                xOffset -= [self widthOfImageView];
-//            } else {
-//                xOffset += [self widthOfImageView];
-//            }
-//        }
-//    }
+    if (self.isDecelerating && !self.isTracking && self.isDragging) {
+        xOffset = self.contentOffset.x - self.allImageViews.count/2*[self widthOfImageView];//[self widthOfImageView];
+        while (fabs(xOffset) >= [self widthOfImageView]) {
+            if (xOffset > 0) {
+                xOffset -= [self widthOfImageView];
+            } else {
+                xOffset += [self widthOfImageView];
+            }
+        }
+    }
     self.contentOffset = CGPointMake(self.allImageViews.count/2*[self widthOfImageView] + xOffset, 0);
+    
     if (kBannerShufflingSVCorridor == self.type) {
         [self resetImageViewScale];
     }
