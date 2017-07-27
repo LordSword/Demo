@@ -245,6 +245,7 @@
             [self.timerIntermediary stop];
             break;
         case kBannerShufflingViewSlideSliding:
+            [self resetImageViewOffset:0];
             [self.timerIntermediary startWithDate:[NSDate dateWithTimeIntervalSinceNow:REPEAT_TIME]];
             break;
         case kBannerShufflingViewSlideStop:
