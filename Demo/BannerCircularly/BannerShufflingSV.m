@@ -276,6 +276,7 @@
 - (void)addImageView:(NSInteger)count {
     [self.visiableImageViews removeAllObjects];
 
+    //这种方式在图片加载时更改数据源会造成图片短暂错位
     if (count == self.allImageViews.count) {
         for (UIView *view in self.allImageViews) {
             view.tag = -1;
