@@ -10,6 +10,8 @@
 
 #import "TimerIntermediary.h"
 
+#import <objc/runtime.h>
+
 #define REPEAT_TIME 5.0f
 #define MAX_VIEW_NUM 5
 #define Image_Min_Scale 0.95
@@ -38,7 +40,7 @@
 - (NSMutableDictionary *)customUndefinedValues {
     
     if (!objc_getAssociatedObject(self, _cmd)) {
-        objc_setAssociatedObject(self, @selector(customUndefinedValues), [[NSMutableDictionary alloc] init], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, _cmd, [[NSMutableDictionary alloc] init], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
     return objc_getAssociatedObject(self, _cmd);
