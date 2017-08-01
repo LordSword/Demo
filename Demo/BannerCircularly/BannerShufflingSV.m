@@ -111,7 +111,7 @@
     self.currentRow = (self.currentRow + (NSInteger)offset + self.row)%self.row;
     
     CGFloat xOffset = 0;
-    if (self.isDecelerating && !self.isTracking && self.isDragging) {
+//    if (self.isDecelerating && !self.isTracking && self.isDragging) {
         xOffset = self.contentOffset.x - self.allImageViews.count/2*[self widthOfImageView];//[self widthOfImageView];
         while (fabs(xOffset) >= [self widthOfImageView]) {
             if (xOffset > 0) {
@@ -120,7 +120,7 @@
                 xOffset += [self widthOfImageView];
             }
         }
-    }
+//    }
     self.contentOffset = CGPointMake(self.allImageViews.count/2*[self widthOfImageView] + xOffset, 0);
     
     if (kBannerShufflingSVCorridor == self.type) {
@@ -170,6 +170,7 @@
         NSInteger rowOfImageView     = [self convertIndexToRow:i];
         UIImageView *imageView       = self.allImageViews[i];
         
+        //在网络情况差的时候需要取消掉还没完成的图片请求
         imageView.image = [tmpDic valueForKey:@(rowOfImageView + Image_Offset).stringValue];
 
         if (imageView.image ) {
