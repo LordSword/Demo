@@ -9,43 +9,39 @@
 #import "BannerShufflingSV.h"
 
 #import "TimerIntermediary.h"
-#import <objc/runtime.h>
 
 #define REPEAT_TIME 5.0f
 #define MAX_VIEW_NUM 5
-#define Image_Offset 100
 #define Image_Min_Scale 0.95
 
 #define Image_Path_Key @"imagePath"
+#define NoImage_Tag  -1
+#define Image_Offset 100
 
 @interface UIImageView(UndefinedKey)
 
-@property (strong, nonatomic) NSMutableDictionary *undefinedValues;
+@property (strong, nonatomic, readonly) NSMutableDictionary *customUndefinedValues;
 
 @end
 
 @implementation UIImageView(UndefinedKey)
-@dynamic undefinedValues;
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {
     
-    [self.undefinedValues setValue:value forKey:key];
+    [self.customUndefinedValues setValue:value forKey:key];
 }
 - (id)valueForUndefinedKey:(NSString *)key {
     
-    return [self.undefinedValues valueForKey:key];
+    return [self.customUndefinedValues valueForKey:key];
 }
 
-- (NSMutableDictionary *)undefinedValues {
+- (NSMutableDictionary *)customUndefinedValues {
     
-    NSMutableDictionary *result = objc_getAssociatedObject(self, (__bridge const void *)(NSStringFromSelector(_cmd)));
-    if (result) {
-        return result;
-    } else {
-        result = [[NSMutableDictionary alloc] init];
-        objc_setAssociatedObject(self,  (__bridge const void *)(NSStringFromSelector(_cmd)), result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        return result;
+    if (!objc_getAssociatedObject(self, _cmd)) {
+        objc_setAssociatedObject(self, @selector(customUndefinedValues), [[NSMutableDictionary alloc] init], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
+    
+    return objc_getAssociatedObject(self, _cmd);
 }
 
 @end
@@ -200,6 +196,7 @@
         
         if (-1 != imageView.tag && [imageView valueForKey:Image_Path_Key]) {
             [tmpDic setValue:imageView.image forKey:@(imageView.tag).stringValue];
+            [tmpDic setValue:[imageView valueForKey:Image_Path_Key] forKey:[NSString stringWithFormat:@"%@%@", Image_Path_Key, @(imageView.tag).stringValue]];
         }
     }
    
@@ -208,12 +205,13 @@
         NSInteger rowOfImageView     = [self convertIndexToRow:i];
         UIImageView *imageView       = self.allImageViews[i];
         
-        imageView.image = [tmpDic valueForKey:@(rowOfImageView + Image_Offset).stringValue];
+        imageView.image = [tmpDic valueForKey:@(rowOfImageView+Image_Offset).stringValue];
 
         if (imageView.image ) {
             imageView.tag = rowOfImageView + Image_Offset;
+            [imageView setValue:[tmpDic valueForKey:[NSString stringWithFormat:@"%@%@", Image_Path_Key, @(rowOfImageView+Image_Offset).stringValue]] forKey:Image_Path_Key];
         } else {
-            imageView.tag = -1;
+            imageView.tag = NoImage_Tag;
             [imageView setValue:nil forKey:Image_Path_Key];
             if ([self.visiableImageViews containsObject:imageView]) {
                 [self loadImageForImageView:imageView];
@@ -250,7 +248,7 @@
     return result;
 }
 - (void)loadImageForImageView:(UIImageView *)imageView {
-    if ( -1 != imageView.tag) return;
+    if ( NoImage_Tag != imageView.tag && [imageView valueForKey:Image_Path_Key]) return;
     NSInteger row = [self convertIndexToRow:[self.allImageViews indexOfObject:imageView]];
 
     imageView.tag = row + Image_Offset;
@@ -328,7 +326,7 @@
     for (NSInteger i = 0; i < count; ++i) {
         UIImageView *imageView = [[UIImageView alloc] init];
         
-        imageView.tag = -1; //代表无图
+        imageView.tag = NoImage_Tag; //代表无图
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
         [imageView addGestureRecognizer:tapGesture];
         imageView.userInteractionEnabled = YES;
