@@ -9,11 +9,48 @@
 #import "BannerShufflingSV.h"
 
 #import "TimerIntermediary.h"
+#import <objc/runtime.h>
 
-#define REPEAT_TIME 2.0f
+#define REPEAT_TIME 5.0f
 #define MAX_VIEW_NUM 5
 #define Image_Offset 100
 #define Image_Min_Scale 0.95
+
+#define Image_Path_Key @"imagePath"
+
+@interface UIImageView(UndefinedKey)
+
+@property (strong, nonatomic) NSMutableDictionary *undefinedValues;
+
+@end
+
+@implementation UIImageView(UndefinedKey)
+@dynamic undefinedValues;
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key {
+    
+    [self.undefinedValues setValue:value forKey:key];
+}
+- (id)valueForUndefinedKey:(NSString *)key {
+    
+    return [self.undefinedValues valueForKey:key];
+}
+
+- (NSMutableDictionary *)undefinedValues {
+    
+    NSMutableDictionary *result = objc_getAssociatedObject(self, (__bridge const void *)(NSStringFromSelector(_cmd)));
+    if (result) {
+        return result;
+    } else {
+        result = [[NSMutableDictionary alloc] init];
+        objc_setAssociatedObject(self,  (__bridge const void *)(NSStringFromSelector(_cmd)), result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        return result;
+    }
+}
+
+@end
+
+
 
 @interface BannerShufflingSV ()
 
@@ -48,6 +85,7 @@
         self.showsVerticalScrollIndicator   = NO;
         self.bounces                        = NO;
         self.pagingEnabled                  = YES;
+//        self.decelerationRate               = 0.1f;
     }
     return self;
 }
@@ -112,7 +150,7 @@
     
     CGFloat xOffset = 0;
 //    if (self.isDecelerating && !self.isTracking && self.isDragging) {
-        xOffset = self.contentOffset.x - self.allImageViews.count/2*[self widthOfImageView];//[self widthOfImageView];
+        xOffset = self.contentOffset.x - self.allImageViews.count/2*[self widthOfImageView];
         while (fabs(xOffset) >= [self widthOfImageView]) {
             if (xOffset > 0) {
                 xOffset -= [self widthOfImageView];
@@ -122,7 +160,7 @@
         }
 //    }
     self.contentOffset = CGPointMake(self.allImageViews.count/2*[self widthOfImageView] + xOffset, 0);
-    
+
     if (kBannerShufflingSVCorridor == self.type) {
         [self resetImageViewScale];
     }
@@ -160,7 +198,7 @@
     for (int i = 0; i < self.allImageViews.count; ++i) {
         UIImageView *imageView = self.allImageViews[i];
         
-        if (-1 != imageView.tag) {
+        if (-1 != imageView.tag && [imageView valueForKey:Image_Path_Key]) {
             [tmpDic setValue:imageView.image forKey:@(imageView.tag).stringValue];
         }
     }
@@ -170,13 +208,13 @@
         NSInteger rowOfImageView     = [self convertIndexToRow:i];
         UIImageView *imageView       = self.allImageViews[i];
         
-        //在网络情况差的时候需要取消掉还没完成的图片请求
         imageView.image = [tmpDic valueForKey:@(rowOfImageView + Image_Offset).stringValue];
 
         if (imageView.image ) {
             imageView.tag = rowOfImageView + Image_Offset;
         } else {
             imageView.tag = -1;
+            [imageView setValue:nil forKey:Image_Path_Key];
             if ([self.visiableImageViews containsObject:imageView]) {
                 [self loadImageForImageView:imageView];
             }
@@ -213,10 +251,15 @@
 }
 - (void)loadImageForImageView:(UIImageView *)imageView {
     if ( -1 != imageView.tag) return;
-    
     NSInteger row = [self convertIndexToRow:[self.allImageViews indexOfObject:imageView]];
-    !self.loadImageBlock ? : self.loadImageBlock(imageView, row, ^(NSString *imagePath){
-        imageView.tag = row + Image_Offset;
+
+    imageView.tag = row + Image_Offset;
+    !self.loadImageBlock ? : self.loadImageBlock(imageView, row, ^(NSString *imagePath, UIImage *defaultImage){
+        if ((row + Image_Offset) == imageView.tag) {
+            [imageView setValue:imagePath forKey:Image_Path_Key];
+        } else {
+            imageView.image = defaultImage;
+        }
     });
 }
 
@@ -270,35 +313,30 @@
 - (void)removeImageView {
     
     [self.allImageViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [obj removeFromSuperview];
+        });
     }];
     [self.allImageViews removeAllObjects];
 }
 - (void)addImageView:(NSInteger)count {
     [self.visiableImageViews removeAllObjects];
-
-    //这种方式在图片加载时更改数据源会造成图片短暂错位
-    if (count == self.allImageViews.count) {
-        for (UIView *view in self.allImageViews) {
-            view.tag = -1;
-        }
-    } else {
-        [self removeImageView];
-        self.scrollEnabled = 1 != count ? : NO;
+    
+    [self removeImageView];
+    self.scrollEnabled = 1 != count ? : NO;
+    
+    for (NSInteger i = 0; i < count; ++i) {
+        UIImageView *imageView = [[UIImageView alloc] init];
         
-        for (NSInteger i = 0; i < count; ++i) {
-            UIImageView *imageView = [[UIImageView alloc] init];
-            
-            imageView.tag = -1; //代表无图
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
-            [imageView addGestureRecognizer:tapGesture];
-            imageView.userInteractionEnabled = YES;
-            [self.allImageViews addObject:imageView];
-            [self addSubview:imageView];
-        }
-        self.contentSize = CGSizeZero; //重置大小
-        [self layoutIfNeeded];
+        imageView.tag = -1; //代表无图
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
+        [imageView addGestureRecognizer:tapGesture];
+        imageView.userInteractionEnabled = YES;
+        [self.allImageViews addObject:imageView];
+        [self addSubview:imageView];
     }
+    self.contentSize = CGSizeZero; //重置大小
+    [self layoutIfNeeded];
 }
 
 #pragma mark - Getter
@@ -314,7 +352,7 @@
     if (!_timerIntermediary) {
         _timerIntermediary = [TimerIntermediary timerIntermediaryWithTimeInterval:REPEAT_TIME target:self action:^(TimerIntermediary *intermediary, BannerShufflingSV *target) {
             
-            [target scrollToIndex:self.allImageViews.count/2 + 1];
+            [target scrollToIndex:target.allImageViews.count/2 + 1];
         } userInfo:nil repeats:YES];
     }
     return _timerIntermediary;
@@ -344,12 +382,10 @@
 
 
 @implementation BannerShufflingSV (delegate)
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     self.didTouch = YES;
     return YES;
 }
-
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.slideState = kBannerShufflingViewSlidePrepare;
 }
@@ -364,12 +400,14 @@
     }
 }
 //- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-//    *targetContentOffset = CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y);
+//    
+//    *targetContentOffset = scrollView.contentOffset;//CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y);
+//    [scrollView setContentOffset:CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y) animated:true];
 //}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    [self setContentOffset:CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y) animated:true];
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    
+//    [self setContentOffset:CGPointMake([self widthOfImageView]*(NSInteger)(scrollView.contentOffset.x/[self widthOfImageView] + 0.5), scrollView.contentOffset.y) animated:true];
+//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.x/[self widthOfImageView] - self.allImageViews.count/2;

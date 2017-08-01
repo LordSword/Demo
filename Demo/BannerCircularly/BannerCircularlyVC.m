@@ -43,11 +43,11 @@
 - (NSInteger)imageLoopNumberOfRow:(BannerShufflingView *)scrollView {
     return self.bannerNames.count;
 }
-- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row complete:(void(^)(NSString *imagePath))complete {
+- (void)imageLoop:(BannerShufflingView *)scrollView visiableImageView:(UIImageView *)imageView imageForRow:(NSInteger)row complete:(void(^)(NSString *imagePath, UIImage *))complete {
     NSLog(@"-----%@", @(row));
     imageView.image = [UIImage imageNamed:self.bannerNames[row]];
     
-    !complete ? : complete(self.bannerNames[row]);
+    !complete ? : complete(self.bannerNames[row], nil);
 }
 
 - (NSArray<NSString *> *)bannerNames {
