@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, BannerShufflingViewSlideState) {
 };
 #define MAX_VIEW_NUM 5
 
-typedef void(^loadImageComplete)(NSString *imagePath, UIImage *defaultImage);
+typedef void(^loadImageComplete)(NSString *imagePath, UIImage *);
 typedef void(^loadImageBlock)(UIImageView *, NSInteger row, loadImageComplete loadIamgeComplete);
 
 //抽象类
