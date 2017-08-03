@@ -255,9 +255,9 @@
 
     imageView.tag = row + Image_Offset;
     !self.loadImageBlock ? : self.loadImageBlock(imageView, row, ^(NSString *imagePath, UIImage *defaultImage){
-        if ((row + Image_Offset) == imageView.tag) {
+        if ((row + Image_Offset) == imageView.tag) { //加载过程中位置会改变
             [imageView setValue:imagePath forKey:Image_Path_Key];
-        } else {
+        } else if (![imageView valueForKey:Image_Path_Key]) { //位置改变后图片如果还是无图就赋值默认图片
             imageView.image = defaultImage;
         }
     });
