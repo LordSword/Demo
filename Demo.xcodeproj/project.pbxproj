@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5035655D1F21EC3A0034F3C8 /* WaterWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */; };
 		503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503565601F21EC870034F3C8 /* WaterWaveView.m */; };
+		506097871F61385500D58326 /* TestLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506097861F61385500D58326 /* TestLoadingViewController.m */; };
+		5060978A1F6138F500D58326 /* LoadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 506097891F6138F500D58326 /* LoadingButton.m */; };
+		5060978C1F613D2400D58326 /* TestLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5060978B1F613D2400D58326 /* TestLoadingViewController.xib */; };
 		5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC5D1ED7FE3F00DF0743 /* main.m */; };
 		5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5073AC601ED7FE3F00DF0743 /* AppDelegate.m */; };
 		5073AC671ED7FE3F00DF0743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5073AC651ED7FE3F00DF0743 /* Main.storyboard */; };
@@ -52,6 +55,11 @@
 		5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveViewController.m; sourceTree = "<group>"; };
 		5035655F1F21EC870034F3C8 /* WaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterWaveView.h; sourceTree = "<group>"; };
 		503565601F21EC870034F3C8 /* WaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveView.m; sourceTree = "<group>"; };
+		506097851F61385500D58326 /* TestLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLoadingViewController.h; sourceTree = "<group>"; };
+		506097861F61385500D58326 /* TestLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLoadingViewController.m; sourceTree = "<group>"; };
+		506097881F6138F500D58326 /* LoadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingButton.h; sourceTree = "<group>"; };
+		506097891F6138F500D58326 /* LoadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingButton.m; sourceTree = "<group>"; };
+		5060978B1F613D2400D58326 /* TestLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestLoadingViewController.xib; sourceTree = "<group>"; };
 		5073AC591ED7FE3F00DF0743 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5073AC5D1ED7FE3F00DF0743 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5073AC5F1ED7FE3F00DF0743 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -124,6 +132,18 @@
 			name = WaterWave;
 			sourceTree = "<group>";
 		};
+		506097841F61382800D58326 /* LoadingButton */ = {
+			isa = PBXGroup;
+			children = (
+				506097851F61385500D58326 /* TestLoadingViewController.h */,
+				506097861F61385500D58326 /* TestLoadingViewController.m */,
+				5060978B1F613D2400D58326 /* TestLoadingViewController.xib */,
+				506097881F6138F500D58326 /* LoadingButton.h */,
+				506097891F6138F500D58326 /* LoadingButton.m */,
+			);
+			name = LoadingButton;
+			sourceTree = "<group>";
+		};
 		5073AC501ED7FE3F00DF0743 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +173,7 @@
 				5073AC951ED8064300DF0743 /* BannerCircularly */,
 				5084CED01F21C61900E99988 /* Wave */,
 				5035655A1F21EBFF0034F3C8 /* WaterWave */,
+				506097841F61382800D58326 /* LoadingButton */,
 				5073AC651ED7FE3F00DF0743 /* Main.storyboard */,
 				5073AC681ED7FE3F00DF0743 /* Assets.xcassets */,
 				5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */,
@@ -331,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5060978C1F613D2400D58326 /* TestLoadingViewController.xib in Resources */,
 				5073ACB11ED8086800DF0743 /* banner3@2x.png in Resources */,
 				5073AC6C1ED7FE3F00DF0743 /* LaunchScreen.storyboard in Resources */,
 				5073AC691ED7FE3F00DF0743 /* Assets.xcassets in Resources */,
@@ -366,10 +388,12 @@
 				507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */,
 				5084CED31F21C64300E99988 /* WaveViewController.m in Sources */,
 				50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */,
+				5060978A1F6138F500D58326 /* LoadingButton.m in Sources */,
 				503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
 				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
+				506097871F61385500D58326 /* TestLoadingViewController.m in Sources */,
 				509155321F1476F800DD53C8 /* BannerShufflingSV.m in Sources */,
 				5035655D1F21EC3A0034F3C8 /* WaterWaveViewController.m in Sources */,
 				509155331F1476F800DD53C8 /* BannerShufflingView.m in Sources */,

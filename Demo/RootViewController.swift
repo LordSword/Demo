@@ -10,7 +10,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     
-    let demoList = ["banner循环滚动", "wave波动", "WaterWave水纹波动"]
+    let demoList = ["banner循环滚动", "wave波动", "WaterWave水纹波动", "增加加载中状态的Button"]
     lazy var tableView:UITableView = {
         var result = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
         
@@ -73,6 +73,8 @@ extension RootViewController:UITableViewDataSource, UITableViewDelegate {
             nextVC = WaveViewController()
         case 2:
             nextVC = WaterWaveViewController()
+        case 3:
+            nextVC = TestLoadingViewController()
         default:
             break
         }
