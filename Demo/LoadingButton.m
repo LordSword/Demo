@@ -72,7 +72,7 @@
     if (_loading == loading) return;
     _loading = loading;
     [super setEnabled:!loading];
-    [self setTitle:loading ? @"":self.disabledTitle forState:UIControlStateDisabled];
+    [super setTitle:loading ? @"":self.disabledTitle forState:UIControlStateDisabled];
     self.loadingLabel.hidden = !loading;
     
     self.indicatorView.color = self.loadingLabel.textColor = self.loadingTitleColor ?:[UIColor whiteColor];
