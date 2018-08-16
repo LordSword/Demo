@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		5035655D1F21EC3A0034F3C8 /* WaterWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */; };
 		503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 503565601F21EC870034F3C8 /* WaterWaveView.m */; };
+		504F68C421254CAD007E34E9 /* NSObject+KVO_Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504F68C321254CAD007E34E9 /* NSObject+KVO_Block.swift */; };
+		504F68C621257301007E34E9 /* KVO_BlockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504F68C521257301007E34E9 /* KVO_BlockVC.swift */; };
+		504F68C82125736B007E34E9 /* KVO_BlockVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504F68C72125736B007E34E9 /* KVO_BlockVC.xib */; };
+		504F68CA212599ED007E34E9 /* ObserverTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504F68C9212599ED007E34E9 /* ObserverTest.swift */; };
 		506097871F61385500D58326 /* TestLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 506097861F61385500D58326 /* TestLoadingViewController.m */; };
 		5060978A1F6138F500D58326 /* LoadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 506097891F6138F500D58326 /* LoadingButton.m */; };
 		5060978C1F613D2400D58326 /* TestLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5060978B1F613D2400D58326 /* TestLoadingViewController.xib */; };
@@ -55,6 +59,10 @@
 		5035655C1F21EC3A0034F3C8 /* WaterWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveViewController.m; sourceTree = "<group>"; };
 		5035655F1F21EC870034F3C8 /* WaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterWaveView.h; sourceTree = "<group>"; };
 		503565601F21EC870034F3C8 /* WaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveView.m; sourceTree = "<group>"; };
+		504F68C321254CAD007E34E9 /* NSObject+KVO_Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+KVO_Block.swift"; sourceTree = "<group>"; };
+		504F68C521257301007E34E9 /* KVO_BlockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVO_BlockVC.swift; sourceTree = "<group>"; };
+		504F68C72125736B007E34E9 /* KVO_BlockVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KVO_BlockVC.xib; sourceTree = "<group>"; };
+		504F68C9212599ED007E34E9 /* ObserverTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverTest.swift; sourceTree = "<group>"; };
 		506097851F61385500D58326 /* TestLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLoadingViewController.h; sourceTree = "<group>"; };
 		506097861F61385500D58326 /* TestLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLoadingViewController.m; sourceTree = "<group>"; };
 		506097881F6138F500D58326 /* LoadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingButton.h; sourceTree = "<group>"; };
@@ -129,7 +137,7 @@
 				5035655F1F21EC870034F3C8 /* WaterWaveView.h */,
 				503565601F21EC870034F3C8 /* WaterWaveView.m */,
 			);
-			name = WaterWave;
+			path = WaterWave;
 			sourceTree = "<group>";
 		};
 		506097841F61382800D58326 /* LoadingButton */ = {
@@ -170,17 +178,18 @@
 				5073AC5F1ED7FE3F00DF0743 /* AppDelegate.h */,
 				5073AC601ED7FE3F00DF0743 /* AppDelegate.m */,
 				5073AC921ED8017400DF0743 /* RootViewController.swift */,
-				5073AC951ED8064300DF0743 /* BannerCircularly */,
-				5084CED01F21C61900E99988 /* Wave */,
-				5035655A1F21EBFF0034F3C8 /* WaterWave */,
-				506097841F61382800D58326 /* LoadingButton */,
+				5073AC8F1ED800BD00DF0743 /* Demo-Bridging-Header.h */,
+				5073AC941ED8018E00DF0743 /* PrefixHeader.pch */,
 				5073AC651ED7FE3F00DF0743 /* Main.storyboard */,
 				5073AC681ED7FE3F00DF0743 /* Assets.xcassets */,
 				5073AC6A1ED7FE3F00DF0743 /* LaunchScreen.storyboard */,
 				5073AC6D1ED7FE3F00DF0743 /* Info.plist */,
+				5073AC951ED8064300DF0743 /* BannerCircularly */,
+				5084CED01F21C61900E99988 /* Wave */,
+				5035655A1F21EBFF0034F3C8 /* WaterWave */,
+				5088CE7121254BFD00E11EC3 /* KVO_Block */,
+				506097841F61382800D58326 /* LoadingButton */,
 				5073AC5C1ED7FE3F00DF0743 /* Supporting Files */,
-				5073AC8F1ED800BD00DF0743 /* Demo-Bridging-Header.h */,
-				5073AC941ED8018E00DF0743 /* PrefixHeader.pch */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -239,7 +248,18 @@
 				5084CED41F21C69200E99988 /* WaveView.h */,
 				5084CED51F21C69200E99988 /* WaveView.m */,
 			);
-			name = Wave;
+			path = Wave;
+			sourceTree = "<group>";
+		};
+		5088CE7121254BFD00E11EC3 /* KVO_Block */ = {
+			isa = PBXGroup;
+			children = (
+				504F68C521257301007E34E9 /* KVO_BlockVC.swift */,
+				504F68C72125736B007E34E9 /* KVO_BlockVC.xib */,
+				504F68C321254CAD007E34E9 /* NSObject+KVO_Block.swift */,
+				504F68C9212599ED007E34E9 /* ObserverTest.swift */,
+			);
+			path = KVO_Block;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +375,7 @@
 				5060978C1F613D2400D58326 /* TestLoadingViewController.xib in Resources */,
 				5073ACB11ED8086800DF0743 /* banner3@2x.png in Resources */,
 				5073AC6C1ED7FE3F00DF0743 /* LaunchScreen.storyboard in Resources */,
+				504F68C82125736B007E34E9 /* KVO_BlockVC.xib in Resources */,
 				5073AC691ED7FE3F00DF0743 /* Assets.xcassets in Resources */,
 				5073ACB01ED8086800DF0743 /* banner2@2x.png in Resources */,
 				5073ACB21ED8086800DF0743 /* banner4@2x.png in Resources */,
@@ -386,11 +407,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				507E21FD1EDF00FF004B9699 /* BannerCircularlyVC.m in Sources */,
+				504F68C621257301007E34E9 /* KVO_BlockVC.swift in Sources */,
 				5084CED31F21C64300E99988 /* WaveViewController.m in Sources */,
 				50D148571EE0503B00490E58 /* TimerIntermediary.m in Sources */,
 				5060978A1F6138F500D58326 /* LoadingButton.m in Sources */,
+				504F68CA212599ED007E34E9 /* ObserverTest.swift in Sources */,
 				503565611F21EC870034F3C8 /* WaterWaveView.m in Sources */,
 				5073AC611ED7FE3F00DF0743 /* AppDelegate.m in Sources */,
+				504F68C421254CAD007E34E9 /* NSObject+KVO_Block.swift in Sources */,
 				5073AC5E1ED7FE3F00DF0743 /* main.m in Sources */,
 				5073AC931ED8017400DF0743 /* RootViewController.swift in Sources */,
 				506097871F61385500D58326 /* TestLoadingViewController.m in Sources */,

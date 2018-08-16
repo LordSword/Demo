@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KVO_BlockVC" customModule="Demo" customModuleProvider="target">
+            <connections>
+                <outlet property="text" destination="YB0-aq-AIP" id="9uD-81-MBv"/>
+                <outlet property="textField" destination="sAX-lp-FEE" id="1A4-jC-7u7"/>
+                <outlet property="view" destination="iN0-l3-epB" id="uoP-KI-8wg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入你想要的值" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sAX-lp-FEE">
+                    <rect key="frame" x="15" y="318.5" width="345" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YB0-aq-AIP">
+                    <rect key="frame" x="171" y="277.5" width="33" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yL-Sl-nJ8">
+                    <rect key="frame" x="172" y="378.5" width="31" height="30"/>
+                    <state key="normal" title="KVO"/>
+                    <connections>
+                        <action selector="setTextValue:" destination="-1" eventType="touchUpInside" id="F59-0W-fhO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3yL-Sl-nJ8" firstAttribute="centerX" secondItem="sAX-lp-FEE" secondAttribute="centerX" id="5g5-u6-4I7"/>
+                <constraint firstItem="3yL-Sl-nJ8" firstAttribute="top" secondItem="sAX-lp-FEE" secondAttribute="bottom" constant="30" id="8Dl-kc-LT5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sAX-lp-FEE" secondAttribute="trailing" constant="15" id="QeW-S1-EJk"/>
+                <constraint firstItem="YB0-aq-AIP" firstAttribute="centerX" secondItem="sAX-lp-FEE" secondAttribute="centerX" id="Wf2-qU-g0J"/>
+                <constraint firstItem="sAX-lp-FEE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="XJD-gK-VXQ"/>
+                <constraint firstItem="sAX-lp-FEE" firstAttribute="top" secondItem="YB0-aq-AIP" secondAttribute="bottom" constant="20" id="YjX-lq-T3N"/>
+                <constraint firstItem="sAX-lp-FEE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vi9-LC-Csk"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-48" y="5"/>
+        </view>
+    </objects>
+</document>

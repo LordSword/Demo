@@ -10,7 +10,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     
-    let demoList = ["banner循环滚动", "wave波动", "WaterWave水纹波动", "增加加载中状态的Button"]
+    let demoList = ["banner循环滚动", "wave波动", "WaterWave水纹波动", "增加加载中状态的Button", "KVO_Block(Swift无法hook属性Set方法)"]
     lazy var tableView:UITableView = {
         var result = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
         
@@ -75,6 +75,8 @@ extension RootViewController:UITableViewDataSource, UITableViewDelegate {
             nextVC = WaterWaveViewController()
         case 3:
             nextVC = TestLoadingViewController()
+        case 4:
+            nextVC = KVO_BlockVC()
         default:
             break
         }
