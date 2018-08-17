@@ -10,5 +10,10 @@ import Foundation
 
 class ObserverTest: NSObject {
     
-    var test: Int?
+    var test: Int? {
+        didSet {
+            
+            print("newValue \(test.debugDescription)")
+        }
+    }
 }

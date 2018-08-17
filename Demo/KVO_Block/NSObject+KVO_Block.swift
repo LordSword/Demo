@@ -36,14 +36,14 @@ extension NSObject {
         
         //判断是否有set 并获取set实现
         let setSEL = Selector( setterForGetter(getter: key))
-        let setMethod = class_getInstanceMethod(type(of: self), setSEL)
+        let setMethod = class_getInstanceMethod(self.classForCoder, setSEL)
         
         //判断是否生成过中间类
-        var observedClass = object_getClass(self)
-        let className = NSStringFromClass(observedClass!)
+        var observedClass = self.classForCoder
+        let className = NSStringFromClass(observedClass)
         
         if !className.hasPrefix("SObserver_") {
-            observedClass = createKVOClass(className:"SObserver_" + className)
+            observedClass = createKVOClass(className:"SObserver_" + className)!
             object_setClass(self, observedClass);
         }
         
@@ -51,7 +51,7 @@ extension NSObject {
         if !self.hasSelector(selector: setSEL) {
             
             let newIMP = method(for: #selector(KVO_setter(tself:cmd:newValue:)))
-            class_addMethod(observedClass, setSEL, newIMP, method_getTypeEncoding(setMethod));
+            class_addMethod(observedClass, setSEL, newIMP!, method_getTypeEncoding(setMethod!));
         }
 
         //添加观察者
@@ -84,8 +84,9 @@ extension NSObject {
         
         var outCount:UInt32
         outCount = 0
-        let methods:UnsafeMutablePointer<Method?>! =  class_copyMethodList( object_getClass(self), &outCount)
+        let methods:UnsafeMutablePointer<Method>! =  class_copyMethodList(self.classForCoder, &outCount)
         
+        print(methods)
         let count:Int = Int(outCount);
         for i in 0..<count {
             
@@ -97,7 +98,7 @@ extension NSObject {
         return false
     }
     
-    func KVO_setter( tself:AnyObject, cmd:Selector, newValue:Any) -> Void {
+    @objc func KVO_setter( tself:AnyObject, cmd:Selector, newValue:Any) -> Void {
         
         let getterName = cmd.description
         let oldValue = tself.value(forKey: getterName)
